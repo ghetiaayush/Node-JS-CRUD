@@ -1,0 +1,59 @@
+CRUD Operations with Terminal Input
+Now let’s make this dynamic — use terminal commands like Write, Read, update, or delete.
+
+const fs = require("fs");
+const operation = process.argv[2];
+process.argv[] gives command-line input.
+
+
+
+Create File from Terminal
+node index.js Write fileName "your content"
+
+
+if (operation === "Write") {
+  const name = process.argv[3];
+  const content = process.argv[4];
+  fs.writeFileSync(`files/${name}.txt`, content);
+  console.log("File Created");
+}
+
+
+Read File from Terminal
+node index.js Read fileName
+
+
+else if (operation === "Read") {
+  const name = process.argv[3];
+  const data = fs.readFileSync(`files/${name}.txt`, "utf-8");
+  console.log(data);
+}
+
+
+Update File from Terminal
+node index.js update fileName "new content"
+
+
+
+
+else if (operation === "update") {
+  const name = process.argv[3];
+  const content = process.argv[4];
+  fs.appendFileSync(`files/${name}.txt`, content);
+}
+
+
+Delete File from Terminal
+node index.js delete fileName
+
+
+else if (operation === "delete") {
+  const name = process.argv[3];
+  fs.unlinkSync(`files/${name}.txt`);
+}
+
+
+Fallback Case
+else {
+  console.log("Operation not found");
+}
